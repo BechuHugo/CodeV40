@@ -1,0 +1,42 @@
+[
+    {
+        "id": "8233341e9d2b0aaf",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "191ad130e12a39a1",
+        "type": "ecowatt",
+        "z": "8233341e9d2b0aaf",
+        "name": "",
+        "ostr": "YmNkNmM1ZDctNDA3ZC00Y2ZmLWE1MGEtNGY5MTdmOWJhMDM3OjNlNmVjMGIyLWZlMDUtNDM0ZC1hOWQ3LWRiYmQ4NGNmOTQxMA==",
+        "sandbox": false,
+        "x": 320,
+        "y": 240,
+        "wires": [
+            [
+                "f94be27f202dfea2"
+            ]
+        ]
+    },
+    {
+        "id": "f94be27f202dfea2",
+        "type": "debug",
+        "z": "8233341e9d2b0aaf",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 240,
+        "wires": []
+    }
+]

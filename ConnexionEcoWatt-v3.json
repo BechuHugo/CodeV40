@@ -1,0 +1,71 @@
+[
+    {
+        "id": "0f406fc226b7fbcb",
+        "type": "tab",
+        "label": "ConnexionEcoWatt",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "90bfabc9a5679c5d",
+        "type": "ecowatt",
+        "z": "0f406fc226b7fbcb",
+        "name": "",
+        "ostr": "YmNkNmM1ZDctNDA3ZC00Y2ZmLWE1MGEtNGY5MTdmOWJhMDM3OjNlNmVjMGIyLWZlMDUtNDM0ZC1hOWQ3LWRiYmQ4NGNmOTQxMA==",
+        "sandbox": false,
+        "x": 320,
+        "y": 240,
+        "wires": [
+            [
+                "481d9dadce3d901c"
+            ]
+        ]
+    },
+    {
+        "id": "481d9dadce3d901c",
+        "type": "debug",
+        "z": "0f406fc226b7fbcb",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "0bbe02edd0e0b61b",
+        "type": "inject",
+        "z": "0f406fc226b7fbcb",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 240,
+        "wires": [
+            [
+                "90bfabc9a5679c5d"
+            ]
+        ]
+    }
+]
