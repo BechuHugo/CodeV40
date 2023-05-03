@@ -1,0 +1,76 @@
+const request = require('supertest');
+const app = require('../app');
+
+describe('Test EcoWatt API modes', () => {
+  let authToken;
+  
+  // Récupérer le token d'authentification avant de lancer les tests
+  beforeAll(async () => {
+    const response = await request(app)
+      .post('/api/authenticate')
+      .send({ username: 'myusername', password: 'mypassword' });
+      
+    authToken = response.body.token;
+  });
+  
+  test('should allow only one mode at a time', async () => {
+    // Activer le mode normal
+    await request(app)
+      .put('/api/mode')
+      .set('Authorization', `Bearer ${authToken}`)
+      .send({ mode: 'normal' })
+      .expect(200);
+    
+    // Activer le mode verrouillage alors que le mode normal est déjà actif
+    await request(app)
+      .put('/api/mode')
+      .set('Authorization', `Bearer ${authToken}`)
+      .send({ mode: 'verrouillage' })
+      .expect(400, { message: 'Un autre mode est déjà actif. Veuillez désactiver le mode actuel avant d\'activer un autre mode.' });
+    
+    // Activer le mode délestage alors que le mode normal est déjà actif
+    await request(app)
+      .put('/api/mode')
+      .set('Authorization', `Bearer ${authToken}`)
+      .send({ mode: 'delestage' })
+      .expect(400, { message: 'Un autre mode est déjà actif. Veuillez désactiver le mode actuel avant d\'activer un autre mode.' });
+    
+    // Désactiver le mode normal
+    await request(app)
+      .delete('/api/mode')
+      .set('Authorization', `Bearer ${authToken}`)
+      .expect(200);
+    
+    // Activer le mode verrouillage
+    await request(app)
+      .put('/api/mode')
+      .set('Authorization', `Bearer ${authToken}`)
+      .send({ mode: 'verrouillage' })
+      .expect(200);
+    
+    // Activer le mode délestage alors que le mode verrouillage est déjà actif
+    await request(app)
+      .put('/api/mode')
+      .set('Authorization', `Bearer ${authToken}`)
+      .send({ mode: 'delestage' })
+      .expect(400, { message: 'Un autre mode est déjà actif. Veuillez désactiver le mode actuel avant d\'activer un autre mode.' });
+    
+    // Désactiver le mode verrouillage
+    await request(app)
+      .delete('/api/mode')
+      .set('Authorization', `Bearer ${authToken}`)
+      .expect(200);
+    
+    // Activer le mode délestage
+    await request(app)
+      .put('/api/mode')
+      .set('Authorization', `Bearer ${authToken}`)
+      .send({ mode: 'delestage' })
+      .expect(200);
+    
+    // Activer le mode normal alors que le mode délestage est déjà actif
+    await request(app)
+      .put('/api/mode')
+      .set('Authorization', `Bearer ${authToken}`)
+      .send({ mode: 'normal' })
+      .expect(400, { message: 'Un autre mode est déjà actif. Veuillez désactiver le mode
