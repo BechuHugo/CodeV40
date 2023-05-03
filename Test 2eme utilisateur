@@ -1,0 +1,39 @@
+const request = require('supertest'); // import de supertest (pour requêtes HTTP)
+const app = require('../app'); // import de l'application
+
+describe('Test de connexion utilisateur', () => {
+  it('devrait empêcher la connexion d\'un second utilisateur pour un même foyer', async () => {
+    // création d'un premier utilisateur avec un foyeId existant
+    const user1 = {
+      nom: 'Dupont',
+      prenom: 'Jean',
+      foyerId: 1,
+    };
+    
+    // création d'un deuxième utilisateur avec le même foyerId
+    const user2 = {
+      nom: 'Martin',
+      prenom: 'Lucie',
+      foyerId: 1,
+    };
+    
+    // envoi de la requête POST pour créer le premier utilisateur
+    const res1 = await request(app)
+      .post('/utilisateurs')
+      .send(user1);
+
+ // vérification que la requête pour créer le premier utilisateur ne renvoie pas d’erreur
+    expect(res2.status).toEqual(200);
+
+      
+    // envoi de la requête POST pour créer le deuxième utilisateur avec le même foyerId
+    const res2 = await request(app)
+      .post('/utilisateurs')
+      .send(user2);
+      
+    // vérification que la requête pour créer le deuxième utilisateur a renvoyé une erreur
+    expect(res2.status).toEqual(400);
+    expect(res2.body.message).toEqual('Un utilisateur est déjà connecté pour ce foyer.');
+  });
+});
+
