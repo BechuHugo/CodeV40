@@ -1,0 +1,235 @@
+[
+    {
+        "id": "b5b2e31681a9ed02",
+        "type": "tab",
+        "label": "Test Relai shipset",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "ca614d0196d01785",
+        "type": "tcp request",
+        "z": "b5b2e31681a9ed02",
+        "server": "192.168.4.1",
+        "port": "8080",
+        "out": "sit",
+        "splitc": " ",
+        "name": "Relay",
+        "x": 480,
+        "y": 300,
+        "wires": [
+            [
+                "45fccec87a25c14a"
+            ]
+        ]
+    },
+    {
+        "id": "45fccec87a25c14a",
+        "type": "debug",
+        "z": "b5b2e31681a9ed02",
+        "name": "relayOutput",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "63354aef0fefab6c",
+        "type": "debug",
+        "z": "b5b2e31681a9ed02",
+        "name": "FunctionOutput",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "bbe7592cf97fa6e9",
+        "type": "function",
+        "z": "b5b2e31681a9ed02",
+        "name": "",
+        "func": "msg.value=Number(msg.topic)+Number(msg.payload);\nmsg.cmd=\"A00\"+msg.topic+\"0\"+msg.payload+\"A\"+msg.value;\nconst buf =Buffer.from(msg.cmd, \"hex\");//\"A00201A3\"\nmsg.payload=buf;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 460,
+        "wires": [
+            [
+                "63354aef0fefab6c",
+                "ca614d0196d01785"
+            ]
+        ]
+    },
+    {
+        "id": "8579c3d75da60f30",
+        "type": "ui_switch",
+        "z": "b5b2e31681a9ed02",
+        "name": "",
+        "label": "R1",
+        "tooltip": "",
+        "group": "c2f644245493f29b",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "1",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 190,
+        "y": 380,
+        "wires": [
+            [
+                "bbe7592cf97fa6e9"
+            ]
+        ]
+    },
+    {
+        "id": "76e1bbc8e0ace2dd",
+        "type": "ui_switch",
+        "z": "b5b2e31681a9ed02",
+        "name": "",
+        "label": "R2",
+        "tooltip": "",
+        "group": "c2f644245493f29b",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "2",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 200,
+        "y": 460,
+        "wires": [
+            [
+                "bbe7592cf97fa6e9"
+            ]
+        ]
+    },
+    {
+        "id": "08fba982987a2249",
+        "type": "ui_switch",
+        "z": "b5b2e31681a9ed02",
+        "name": "",
+        "label": "R3",
+        "tooltip": "",
+        "group": "c2f644245493f29b",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "3",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 170,
+        "y": 520,
+        "wires": [
+            [
+                "bbe7592cf97fa6e9"
+            ]
+        ]
+    },
+    {
+        "id": "f46b3885a7a460b6",
+        "type": "ui_switch",
+        "z": "b5b2e31681a9ed02",
+        "name": "",
+        "label": "R4",
+        "tooltip": "",
+        "group": "c2f644245493f29b",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "4",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 170,
+        "y": 580,
+        "wires": [
+            [
+                "bbe7592cf97fa6e9"
+            ]
+        ]
+    },
+    {
+        "id": "c2f644245493f29b",
+        "type": "ui_group",
+        "name": "User Interface",
+        "tab": "7fd49bd23fc9225a",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "7fd49bd23fc9225a",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
